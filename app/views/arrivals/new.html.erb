@@ -1,0 +1,44 @@
+<!-- Validation failure messages -->
+<% if @arrival.errors.any? %>
+  <% @arrival.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Arrival</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_arrival" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for train_id -->
+      <div class="form-group">
+        <label for="train_id" class="control-label">
+          Train
+        </label>
+        <input type="text" id="train_id" name="train_id" placeholder="Train" class="form-control" value="<%= @arrival.train_id %>">
+      </div>
+
+      <!-- Label and input for platform -->
+      <div class="form-group">
+        <label for="platform" class="control-label">
+          Platform
+        </label>
+        <input type="text" id="platform" name="platform" placeholder="Platform" class="form-control" value="<%= @arrival.platform %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Arrival
+      </button>
+      or
+      <a href="/arrivals">Cancel</a>
+    </form>
+  </div>
+</div>

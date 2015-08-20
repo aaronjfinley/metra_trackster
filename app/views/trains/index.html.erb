@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>
+    Trains
+    <a href="/trains/new" class="btn btn-lg btn-success">New Train</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Arrives at</th>
+        <th>Line</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @trains.each do |train| %>
+      <tr>
+        <td><%= train.arrives_at %></td>
+        <td><%= train.line %></td>
+        <td>
+          <a href="/trains/<%= train.id %>" class="btn btn-primary">Show</a>
+          <a href="/trains/<%= train.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_train/<%= train.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

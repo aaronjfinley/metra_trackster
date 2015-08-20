@@ -1,0 +1,44 @@
+<!-- Validation failure messages -->
+<% if @train.errors.any? %>
+  <% @train.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Train</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_train" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for arrives_at -->
+      <div class="form-group">
+        <label for="arrives_at" class="control-label">
+          Arrives at
+        </label>
+        <input type="text" id="arrives_at" name="arrives_at" placeholder="Arrives at" class="form-control" value="<%= @train.arrives_at %>">
+      </div>
+
+      <!-- Label and input for line -->
+      <div class="form-group">
+        <label for="line" class="control-label">
+          Line
+        </label>
+        <input type="text" id="line" name="line" placeholder="Line" class="form-control" value="<%= @train.line %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Train
+      </button>
+      or
+      <a href="/trains">Cancel</a>
+    </form>
+  </div>
+</div>
