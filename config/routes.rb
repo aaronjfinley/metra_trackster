@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "/", :controller => "trains", :action => "index"
+
   # Routes for the Train resource:
   # CREATE
   get "/trains/new", :controller => "trains", :action => "new"

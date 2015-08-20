@@ -16,7 +16,7 @@
 
       <% @trains.each do |train| %>
       <tr>
-        <td><%= train.arrives_at %></td>
+        <td><%= train.arrives_at.strftime "%l:%M%P" %></td>
         <td><%= train.line %></td>
         <td>
           <a href="/trains/<%= train.id %>" class="btn btn-primary">Show</a>
