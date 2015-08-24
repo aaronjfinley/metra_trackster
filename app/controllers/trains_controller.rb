@@ -1,6 +1,6 @@
 class TrainsController < ApplicationController
   def index
-    @trains = Train.all
+    @trains = Train.all.sort_by {|k| k[:arrives_at]}
   end
 
   def show

@@ -32,7 +32,7 @@
         <label for="platform" class="control-label">
           Platform
         </label>
-        <input type="text" id="platform" name="platform" placeholder="Platform" class="form-control" value="<%= @arrival.platform %>">
+        <%= select_tag(:platform, options_for_select([ "1", "2", "3" ], "2"), :class => "form-control") %>
       </div>
 
       <button class="btn btn-success">

@@ -24,7 +24,7 @@
           Arrives at
         </label>
 
-        <input type="text" id="arrives_at" name="arrives_at" placeholder="Arrives at" class="form-control" value="<%= @train.arrives_at %>">
+        <input type="text" id="arrives_at" name="arrives_at" placeholder="Arrives at" class="form-control" value="<%= @train.arrives_at.strftime("%l:%M%P") %>">
       </div>
 
       <!-- Label and input for line -->

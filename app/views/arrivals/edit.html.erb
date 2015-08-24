@@ -23,8 +23,7 @@
         <label for="train_id" class="control-label">
           Train
         </label>
-
-        <input type="text" id="train_id" name="train_id" placeholder="Train" class="form-control" value="<%= @arrival.train_id %>">
+        <%= select_tag(:train_id, options_from_collection_for_select(Train.all, :id, :arrives_at_str, @arrival.train_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for platform -->
@@ -33,7 +32,7 @@
           Platform
         </label>
 
-        <input type="text" id="platform" name="platform" placeholder="Platform" class="form-control" value="<%= @arrival.platform %>">
+        <%= select_tag(:platform, options_for_select([ "1", "2", "3" ], "2"), :class => "form-control") %>
       </div>
 
       <button class="btn btn-warning">
