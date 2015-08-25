@@ -31,7 +31,23 @@ class ArrivalsController < ApplicationController
     if @arrival.save
       redirect_to "/trains", :notice => "Arrival created successfully."
     else
-      redirect_to "/trains"
+      @trains = Train.all.sort_by {|k| k[:arrives_at]}
+
+      @platform_stats = {}
+      @trains.each do |train|
+        @platform_stats[train.id.to_s] = {}
+        arrival_count = train.arrivals.count.to_f
+
+        [1, 2, 3].each do |p|
+          @platform_stats[train.id.to_s][p.to_s] = {"count" => train.arrivals.where(:platform => p).count}
+          if @platform_stats[train.id.to_s][p.to_s]["count"] > 0
+            @platform_stats[train.id.to_s][p.to_s]["pct"] = ((@platform_stats[train.id.to_s][p.to_s]["count"] / arrival_count).round(2)*100).to_i.to_s+"%"
+          else
+            @platform_stats[train.id.to_s][p.to_s]["pct"] = nil
+          end
+        end
+      end
+      render "./trains/index.html.erb"
     end
 
   end
