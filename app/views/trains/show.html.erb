@@ -5,13 +5,13 @@
 <div class="row">
   <div class="col-md-12">
     <dl class="dl-horizontal">
-      <dt>Arrives at</dt>
+      <dt>Arrival Time</dt>
       <dd><%= @train.arrives_at.strftime "%l:%M%P" %></dd>
 
       <dt>Line</dt>
       <dd><%= @train.line %></dd>
 
-      <dt>Platform Summary</dt>
+      <dt>Arrival Summary</dt>
       <dd>
         <ul class="list-group">
 
@@ -26,14 +26,10 @@
           <% end %>
         </ul>
       </dd>
-
-      <dt>Platform History</dt>
+      <dt>Add Arrival</dt>
       <dd>
         <ul class="list-group">
-          <% @train.arrivals.each do |arrivals| %>
-          <li class="list-group-item"><%= arrivals.created_at.strftime('%Y-%m-%d') %>: Platform <%= arrivals.platform %>
-          </li>
-          <% end %>
+
 
           <li class="list-group-item">
             <form action="/create_arrival" method="post">
@@ -52,17 +48,43 @@
               <input name="train_id" type="hidden" value="<%= @train.id %>">
 
               <button class="btn btn-success">
-                Save Platform
+                Save Arrival
               </button>
             </form>
           </li>
         </ul>
       </dd>
 
+      <dt>Arrival History</dt>
+      <dd>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-striped table-hover">
+              <tr>
+                <th>Date</th>
+                <th>Platform</th>
+                <th>Actions</th>
+              </tr>
+              <% @train.arrivals.each do |arrival| %>
+              <tr><td><%= arrival.created_at.strftime('%Y-%m-%d') %></td> <td><%= arrival.platform %></td>
+
+                <td>
+                  <a href="/arrivals/<%= arrival.id %>" class="btn btn-primary">Show</a>
+                  <a href="/arrivals/<%= arrival.id %>/edit" class="btn btn-warning">Edit</a>
+                  <a href="/delete_arrival/<%= arrival.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+                </td>
+              </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </dd>
+
+
     </dl>
 
     <div class="btn-group btn-group-justified">
-      <a href="/trains" class="btn btn-primary">
+    <a href="/trains" class="btn btn-primary">
         Back
       </a>
       <!-- <a href="/trains/<%= @train.id %>/edit" class="btn btn-warning">
