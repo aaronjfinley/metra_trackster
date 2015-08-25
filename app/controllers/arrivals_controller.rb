@@ -23,6 +23,19 @@ class ArrivalsController < ApplicationController
     end
   end
 
+  def create_from_index
+    @arrival = Arrival.new
+    @arrival.train_id = params[:train_id]
+    @arrival.platform = params[:platform]
+
+    if @arrival.save
+      redirect_to "/trains", :notice => "Arrival created successfully."
+    else
+      redirect_to "/trains"
+    end
+
+  end
+
   def edit
     @arrival = Arrival.find(params[:id])
   end

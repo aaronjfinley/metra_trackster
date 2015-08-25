@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # Routes for the Arrival resource:
   # CREATE
   get "/arrivals/new", :controller => "arrivals", :action => "new"
+  get "/create_arrival/:train_id/:platform", :controller => "arrivals", :action => "create_from_index"
   post "/create_arrival", :controller => "arrivals", :action => "create"
 
   # READ

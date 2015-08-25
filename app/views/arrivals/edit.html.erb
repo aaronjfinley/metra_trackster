@@ -32,7 +32,7 @@
           Platform
         </label>
 
-        <%= select_tag(:platform, options_for_select([ "1", "2", "3" ], "2"), :class => "form-control") %>
+        <%= select_tag(:platform, options_for_select([ "1", "2", "3" ], @arrival.platform), :class => "form-control") %>
       </div>
 
       <button class="btn btn-warning">

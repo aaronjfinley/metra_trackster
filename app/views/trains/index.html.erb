@@ -1,8 +1,18 @@
+<!-- Validation failure messages -->
+<% if @arrival.errors.any? %>
+  <% @arrival.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="page-header">
-  <h1>
-    Trains
-    <a href="/trains/new" class="btn btn-lg btn-success">New Train</a>
-  </h1>
+  <h2>
+    Metra Trains - Clybourn to Olgilvie
+    <!-- <a href="/trains/new" class="btn btn-lg btn-success">New Train</a>
+  </h2> -->
 </div>
 
 <div class="row">
@@ -11,17 +21,45 @@
       <tr>
         <th>Arrives at</th>
         <th>Line</th>
+        <th>Platform 1</th>
+        <th>Platform 2</th>
+        <th>Platform 3</th>
         <th>Actions</th>
+
       </tr>
 
       <% @trains.each do |train| %>
       <tr>
         <td><%= train.arrives_at.strftime "%l:%M%P" %></td>
         <td><%= train.line %></td>
+        <% ["1", "2", "3"].each do |p| %>
         <td>
+          <div class="input-group">
+            <%= @platform_stats[train.id.to_s][p]["pct"] %>
+            <% if @platform_stats[train.id.to_s][p]["count"] > 0%>
+            <span class="badge"><%= @platform_stats[train.id.to_s][p]["count"] %></span>
+            <% end %>
+
+
+          </div>
+        </td>
+        <% end %>
+        <td>
+
+          <div class="dropdown">
           <a href="/trains/<%= train.id %>" class="btn btn-primary">Show</a>
-          <a href="/trains/<%= train.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_train/<%= train.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Add Arrival
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="/create_arrival/<%= train.id %>/1">Platform 1</a></li>
+              <li><a href="/create_arrival/<%= train.id %>/2">Platform 2</a></li>
+              <li><a href="/create_arrival/<%= train.id %>/3">Platform 3</a></li>
+            </ul>
+          </div>
+          <!-- <a href="/trains/<%= train.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_train/<%= train.id %>" class="btn btn-danger" rel="nofollow">Delete</a> -->
         </td>
       </tr>
       <% end %>
