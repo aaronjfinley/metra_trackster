@@ -18,9 +18,9 @@ class ArrivalsController < ApplicationController
 
     if params.has_key? "trains_show_page"
       if @arrival.save
-        redirect_to "/trains/#{params[:train_id]}", :notice => "Arrival created successfully."
+        redirect_to "/trains/#{params[:train_id]}", :notice => "Arrival added successfully."
       else
-        redirect_to "/trains/#{params[:train_id]}", :alert => "Failed to add arrival"
+        redirect_to "/trains/#{params[:train_id]}", :alert => "Platform already added for #{@arrival.train.arrives_at.strftime("%l:%M%P")} train on #{Date.today}."
       end
     else
       if @arrival.save
@@ -37,25 +37,10 @@ class ArrivalsController < ApplicationController
     @arrival.platform = params[:platform]
 
     if @arrival.save
-      redirect_to "/trains", :notice => "Arrival created successfully."
+      redirect_to "/trains", :notice => "Arrival added successfully."
     else
-      @trains = Train.all.sort_by {|k| k[:arrives_at]}
+      redirect_to "/trains", :alert => "Platform already added for #{@arrival.train.arrives_at.strftime("%l:%M%P")} train on #{Date.today}."
 
-      @platform_stats = {}
-      @trains.each do |train|
-        @platform_stats[train.id.to_s] = {}
-        arrival_count = train.arrivals.count.to_f
-
-        [1, 2, 3].each do |p|
-          @platform_stats[train.id.to_s][p.to_s] = {"count" => train.arrivals.where(:platform => p).count}
-          if @platform_stats[train.id.to_s][p.to_s]["count"] > 0
-            @platform_stats[train.id.to_s][p.to_s]["pct"] = ((@platform_stats[train.id.to_s][p.to_s]["count"] / arrival_count).round(2)*100).to_i.to_s+"%"
-          else
-            @platform_stats[train.id.to_s][p.to_s]["pct"] = nil
-          end
-        end
-      end
-      render "./trains/index.html.erb"
     end
 
   end
