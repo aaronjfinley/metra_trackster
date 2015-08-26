@@ -10,8 +10,9 @@ class Arrival < ActiveRecord::Base
 
     dates_for_train_id = []
     Arrival.all.each do |arr|
-      if arr.train_id == train_id
-        dates_for_train_id.push(arr.created_at.to_date)
+      #find all created_at dates for train_id excluding the one you are editing
+      if arr.train_id == train_id && arr.id != id
+        dates_for_train_id.push(arr.created_at.in_time_zone("Central Time (US & Canada)").to_date)
       end
     end
 
