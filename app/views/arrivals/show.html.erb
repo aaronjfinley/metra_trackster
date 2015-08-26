@@ -15,7 +15,10 @@
 
     <div class="btn-group btn-group-justified">
       <a href="/arrivals" class="btn btn-primary">
-        Back
+        Arrivals
+      </a>
+      <a href="/trains/<%= @arrival.train.id %>" class="btn btn-primary">
+        Train <%= @arrival.train.arrives_at.strftime("%l:%M%P") %>
       </a>
       <a href="/arrivals/<%= @arrival.id %>/edit" class="btn btn-warning">
         Edit
