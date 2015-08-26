@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   post "/update_arrival/:id", :controller => "arrivals", :action => "update"
 
   # DELETE
+  get "/delete_arrival/:id/:train_id", :controller => "arrivals", :action => "destroy"
   get "/delete_arrival/:id", :controller => "arrivals", :action => "destroy"
   #------------------------------
 

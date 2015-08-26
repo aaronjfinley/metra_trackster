@@ -1,3 +1,13 @@
+<!-- Validation failure messages -->
+<% if @arrival and @arrival.errors.any? %>
+  <% @arrival.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
 <div class="page-header">
   <h3>Train: <%= @train.arrives_at.strftime('%l:%M%P') %></h3>
 </div>
@@ -29,8 +39,6 @@
       <dt>Add Arrival</dt>
       <dd>
         <ul class="list-group">
-
-
           <li class="list-group-item">
             <form action="/create_arrival" method="post">
               <!-- Hidden input for authenticity token to protect from forgery -->
@@ -41,14 +49,15 @@
                 <label for="platform" class="control-label">
                   Platform
                 </label>
-                <%= select_tag(:platform, options_for_select([ "1", "2", "3" ], "2"), :class => "form-control") %>
+                <%= select_tag(:platform, options_for_select({ "Platform 1" => "1", "Platform 2" => "2", "Platform 3" => "3" }), :class => "form-control") %>
               </div>
 
               <!-- Label and input for director_id -->
               <input name="train_id" type="hidden" value="<%= @train.id %>">
+              <input name="trains_show_page" type="hidden" value=<%= true %>>
 
               <button class="btn btn-success">
-                Save Arrival
+                Add Arrival
               </button>
             </form>
           </li>
@@ -71,7 +80,7 @@
                 <td>
                   <a href="/arrivals/<%= arrival.id %>" class="btn btn-primary">Show</a>
                   <a href="/arrivals/<%= arrival.id %>/edit" class="btn btn-warning">Edit</a>
-                  <a href="/delete_arrival/<%= arrival.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+                  <a href="/delete_arrival/<%= arrival.id %>/<%= @train.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
                 </td>
               </tr>
               <% end %>

@@ -16,10 +16,18 @@ class ArrivalsController < ApplicationController
     @arrival.train_id = params[:train_id]
     @arrival.platform = params[:platform]
 
-    if @arrival.save
-      redirect_to "/arrivals", :notice => "Arrival created successfully."
+    if params.has_key? "trains_show_page"
+      if @arrival.save
+        redirect_to "/trains/#{params[:train_id]}", :notice => "Arrival created successfully."
+      else
+        redirect_to "/trains/#{params[:train_id]}", :alert => "Failed to add arrival"
+      end
     else
-      render 'new'
+      if @arrival.save
+        redirect_to "/arrivals", :notice => "Arrival created successfully."
+      else
+        render 'new'
+      end
     end
   end
 
@@ -74,6 +82,10 @@ class ArrivalsController < ApplicationController
 
     @arrival.destroy
 
-    redirect_to "/arrivals", :notice => "Arrival deleted."
+    if params.has_key? "train_id"
+      redirect_to "/trains/#{params[:train_id]}", :notice => "Arrival deleted."
+    else
+      redirect_to "/arrivals", :notice => "Arrival deleted."
+    end
   end
 end
