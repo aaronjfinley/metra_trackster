@@ -1,6 +1,7 @@
 == README
 
-Metra Trackster displays the morning Metra schedule for the Clybourn to Olgilvie route. It allows users to log the platforms that the train arrives on each day. It shows the percentage that the train arrived on each specific platform. It also shows the count of occurrences. It also prevents the user from adding more than one platform per train per day.
+<p>Metra Trackster displays the morning Metra schedule for the Clybourn to Olgilvie route. It allows users to log the platforms that the train arrives on each day. It shows the percentage that the train arrived on each specific platform. It also shows the count of occurrences. It also prevents the user from adding more than one platform per train per day.</p>
 
 rake db:seed
+
 for train schedule and pre-populated arrivals
