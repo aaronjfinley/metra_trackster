@@ -32,8 +32,6 @@ class TrainsController < ApplicationController
         @platform_stats[p.to_s]["pct"] = nil
       end
     end
-
-
   end
 
   def new

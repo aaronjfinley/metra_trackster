@@ -1,11 +1,11 @@
 <!-- Validation failure messages -->
 <% if @arrival and @arrival.errors.any? %>
-  <% @arrival.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @arrival.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <div class="page-header">
@@ -39,15 +39,13 @@
             <% if @platform_stats[train.id.to_s][p]["count"] > 0%>
             <span class="badge"><%= @platform_stats[train.id.to_s][p]["count"] %></span>
             <% end %>
-
-
           </div>
         </td>
         <% end %>
         <td>
 
           <div class="dropdown">
-          <a href="/trains/<%= train.id %>" class="btn btn-primary">Show</a>
+            <a href="/trains/<%= train.id %>" class="btn btn-primary">Show</a>
             <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
               Add Arrival
               <span class="caret"></span>
