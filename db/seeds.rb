@@ -25,8 +25,6 @@ Arrival.create!([
   {train_id: 24, platform: 1},
   {train_id: 13, platform: 1},
   {train_id: 18, platform: 1},
-  {train_id: 2, platform: 2},
-  {train_id: 1, platform: 1},
   {train_id: 3, platform: 1},
   {train_id: 4, platform: 1},
   {train_id: 5, platform: 1},
@@ -49,7 +47,9 @@ Arrival.create!([
   {train_id: 22, platform: 1},
   {train_id: 23, platform: 1},
   {train_id: 24, platform: 1},
-  {train_id: 25, platform: 1}
+  {train_id: 25, platform: 1},
+  {train_id: 2, platform: 1},
+  {train_id: 1, platform: 1}
 ])
 Train.create!([
   {arrives_at: "2000-01-01 06:36:00", line: "N"},
